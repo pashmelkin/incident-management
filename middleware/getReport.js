@@ -1,6 +1,5 @@
 "use strict";
 
-const request = require('request');
 const config = require('../config');
 const apiCallUtil = require('../utils/apiCall');
 const dateUtils = require('../utils/dates');
