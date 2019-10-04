@@ -9,6 +9,7 @@ var onCallRouter = require('./routes/onCall');
 var excelRouter = require('./routes/excel');
 var overridesRouter = require('./routes/overrides');
 var reportRouter = require('./routes/report');
+var healthCheckRouter = require('./routes/health');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/onCall', onCallRouter);
 app.use('/overrides', overridesRouter);
 app.use('/excel', excelRouter);
 app.use('/report', reportRouter);
+app.use('/health', healthCheckRouter);
 
 
 // catch 404 and forward to error handler
