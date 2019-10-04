@@ -1,0 +1,88 @@
+# This is an example of a deployment - a declaration of pods.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "incident-management-deployment"
+  labels:
+    app: "incident-management"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "incident-management"
+  template:
+    metadata:
+      labels:
+        app: "incident-management"
+      annotations:
+        update: "incident-management"
+    spec:
+      containers:
+        - image: "325571649150.dkr.ecr.ap-southeast-2.amazonaws.com/incident-management-docker-repository:latest"
+          name: incident-management
+          ports:
+            - containerPort: 3001
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3001
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3001
+            initialDelaySeconds: 3
+            timeoutSeconds: 8
+            periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+  labels:
+    app: "incident-management"
+  name: "incident-management-service"
+spec:
+  ports:
+    - port: 3001
+      targetPort: 3001
+  selector:
+    app: "incident-management"
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    "kubernetes.io/tls-acme": "true"
+  name: "incident-management-ingress"
+spec:
+  rules:
+    - host: "incident-management.svc.platform.myobdev.com"
+      http:
+        paths:
+          - backend:
+              serviceName: "incident-management-service"
+              servicePort: 3001
+            path: /
+  tls:
+    - hosts:
+        - "incident-management.svc.platform.myobdev.com"
+      secretName: "incident-management-tls"
+---
+apiVersion: myob.com/v1alpha1
+kind: PostgresDB
+metadata:
+  name: victorops-db
+  namespace: training
+data:
+  POSTGRES_DB: postgresdb
+  POSTGRES_USER: postgresadmin
+  POSTGRES_PASSWORD: admin123
+spec:
+  size: "db.t2.small"
+  storage: "20"
