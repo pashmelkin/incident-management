@@ -10,6 +10,7 @@ var excelRouter = require('./routes/excel');
 var overridesRouter = require('./routes/overrides');
 var reportRouter = require('./routes/report');
 var healthCheckRouter = require('./routes/health');
+var readyCheckRouter = require('./routes/ready');
 
 var app = express();
 
@@ -29,6 +30,8 @@ app.use('/overrides', overridesRouter);
 app.use('/excel', excelRouter);
 app.use('/report', reportRouter);
 app.use('/health', healthCheckRouter);
+app.use('/ready', readyCheckRouter);
+
 
 
 // catch 404 and forward to error handler
