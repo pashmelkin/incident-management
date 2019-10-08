@@ -27,15 +27,15 @@ spec:
             httpGet:
               path: /health
               port: 3001
-            initialDelaySeconds: 3
+            initialDelaySeconds: 10
             periodSeconds: 5
           readinessProbe:
             httpGet:
-              path: /
+              path: /ready
               port: 3001
-            initialDelaySeconds: 3
+            initialDelaySeconds: 10
             timeoutSeconds: 8
-            periodSeconds: 10
+            periodSeconds: 30
 
 ---
 apiVersion: v1
