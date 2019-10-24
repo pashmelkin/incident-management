@@ -4,7 +4,7 @@ var express = require('express');
 var fs = require('fs');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   console.log("victorops: call of excel ");
 
   fs.readFile('./temp.txt', 'utf8', function read(err, data) {

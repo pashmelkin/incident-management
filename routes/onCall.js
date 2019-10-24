@@ -12,7 +12,7 @@ let onCall = {
   "date": ""
 }
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     onCall.team = req.query.team;
     onCall.date = dateUtils.getCurrentDate();
 

@@ -4,11 +4,11 @@ const express = require('express');
 const router = express.Router();
 const victorops = require("../utils/getOverrides");
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
    let reqUser = req.query.user;
    let overUser ='';
 
-   const result = victorops.getOverrides().then(function (jsonBody) {
+    victorops.getOverrides().then(function (jsonBody) {
 
      jsonBody.overrides.forEach(function(override) {
           var user = override.user.username;
