@@ -5,7 +5,7 @@ const incidentService = require("../middleware/getReport");
 const router = express.Router();
 
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     const team = req.query.team;
     const date = req.query.date;
 
