@@ -11,7 +11,7 @@ module.exports = {
 
     getOverride: function (user) {
 
-        return utils.MakeRequest(options).then(function (jsonBody){
+        return utils.MakeRequest(options).then(function (){
             let overUser ='';
 
             return utils.MakeRequest(options).then(function (jsonBody) {
