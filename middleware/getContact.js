@@ -3,15 +3,19 @@
 const config  = require('../config');
 const utils   = require('../utils/apiCall');
 const victoropsContactTemplateURl = config.victoropsUrlBase + config.victorops.contact;
-var options = {
-    url: "",
-    headers: config.apiHeaders
-};
+
+function buildOptions(url) {
+  this.url = url;
+  this.headers = config.apiHeaders;
+}
 
 module.exports = {
 
     getContact: function (user) {
-      options.url = victoropsContactTemplateURl.replace("{user}", user);
+      const contactUserUrl = victoropsContactTemplateURl.replace("{user}", user);
+
+      const options = new buildOptions(contactUserUrl);
+
       let phone = "Phone details not found";
         return utils.MakeRequest(options).then(function (jsonBody){
 
