@@ -8,7 +8,7 @@ module.exports = {
 
       return new Promise((success, failure) => {
           request(options, function (error, response, body) {
-              if(error){  failure(error) };
+              if(error){  failure(error) }
               if (response.statusCode == 200) {
                 let jsonBody =  JSON.parse(body);
                 success(jsonBody);
