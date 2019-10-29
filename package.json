@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "pretest": "eslint --ignore-path .gitignore .",
-    "test": "jest"
+    "test": "jest",
+    "precommit": "npm test"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "eslint": "^6.5.1",
+    "husky": "^3.0.9",
     "jest": "^24.9.0",
     "nodemon": "^1.19.1"
   }
