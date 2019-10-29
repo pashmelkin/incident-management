@@ -51,5 +51,6 @@ app.use(function(err, req, res) {
   res.status(err.status || 500);
   res.render('error');
 });
+app.get('/favicon.ico', (req, res) => res.status(204));
 
 module.exports = app;
