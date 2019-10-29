@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Running pre-commit hook"
+echo "Running pre-commit hook "
 npm test
 
 # $? stores exit value of the last command
