@@ -19,7 +19,7 @@ module.exports = {
                     if (user === override.user.username)
                     {
                         overUser = override.assignments[0].user;
-                        console.log("user found" + overUser);
+                        console.log("user found:" + overUser);
                     }
                 });
                 return (overUser);
