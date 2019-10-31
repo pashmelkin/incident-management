@@ -1,0 +1,19 @@
+---
+steps:
+
+  - name: ":node:"
+    label: ":cloud: npm step"
+    command: "npm install && npm test"
+    branches: 'master'
+    agents:
+      queue: 'identsrv-dev'
+  - label: ":cloud: Build and Deploy Docker image"
+    command: "scripts/buildContainer.sh"
+    branches: 'master'
+    agents:
+      queue: 'identsrv-dev'
+  - label: ":cloud: Deploy to K8s"
+    command: "scripts/deploy.sh"
+    branches: 'master'
+    agents:
+      queue: 'identsrv-dev'
