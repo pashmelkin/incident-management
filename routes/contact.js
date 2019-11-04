@@ -3,8 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const incidentService = require("../middleware/getContact");
+const redisService = require("../middleware/checkCache");
 
-router.get('/', function(req, res) {
+router.get('/', redisService.checkCache, function(req, res) {
     let reqUser = req.query.user;
 
     incidentService.getContact(reqUser).then(function (phone) {
