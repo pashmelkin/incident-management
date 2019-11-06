@@ -3,10 +3,8 @@
 const config  = require('../config');
 const utils   = require('../utils/apiCall');
 const victoropsContactTemplateURl = config.victoropsUrlBase + config.victorops.contact;
-const redis = require('redis');
+const redisClient = require('../utils/redisClient');
 
-const port_redis = process.env.REDISPORT || config.port;
-const redis_client = redis.createClient(port_redis);
 const TIME_KEEP_SECS = 3600;
 
 function buildOptions(url) {
@@ -27,7 +25,7 @@ module.exports = {
             if (contactMethod.contactType === "Phone")
             {
                 phone = contactMethod.value;
-                redis_client.setex(user, TIME_KEEP_SECS, phone);
+                redisClient.setex(user, TIME_KEEP_SECS, phone);
             }
             });
           return (phone);
