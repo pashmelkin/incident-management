@@ -12,7 +12,7 @@ var reportRouter = require('./routes/report');
 var healthCheckRouter = require('./routes/health');
 var readyCheckRouter = require('./routes/ready');
 var contactRouter = require('./routes/contact');
-
+var mockRouter = require('./routes/mock');
 
 var app = express();
 
@@ -27,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+
 app.use('/onCall', onCallRouter);
 app.use('/overrides', overridesRouter);
 app.use('/excel', excelRouter);
@@ -34,7 +35,7 @@ app.use('/report', reportRouter);
 app.use('/health', healthCheckRouter);
 app.use('/ready', readyCheckRouter);
 app.use('/contact', contactRouter);
-
+app.use('/mock', mockRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,5 +53,13 @@ app.use(function(err, req, res) {
   res.render('error');
 });
 app.get('/favicon.ico', (req, res) => res.status(204));
+
+app.all('*', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, PATCH, OPTIONS');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 module.exports = app;

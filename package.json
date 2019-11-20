@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "npm run build && node ./bin/index.js",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "devstart": "nodemon ./bin/www",
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "jest",
@@ -22,9 +23,12 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "eslint": "^6.5.1",
     "husky": "^3.0.9",
     "jest": "^24.9.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "rimraf": "^3.0.0"
   }
 }
