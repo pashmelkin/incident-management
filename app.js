@@ -27,6 +27,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.all('*', (req, res, next) => {
+   res.header('Access-Control-Allow-Origin', '*');
+   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, PATCH, OPTIONS');
+   res.header('Access-Control-Allow-Headers', '*');
+   res.header('Access-Control-Allow-Credentials', true);
+   next();
+ });
+
 app.use('/', indexRouter);
 app.use('/onCall', onCallRouter);
 app.use('/overrides', overridesRouter);
@@ -55,12 +63,6 @@ app.use(function(err, req, res) {
 });
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-app.all('*', (req, res, next) => {
-   res.header('Access-Control-Allow-Origin', '*');
-   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, PATCH, OPTIONS');
-   res.header('Access-Control-Allow-Headers', '*');
-   res.header('Access-Control-Allow-Credentials', true);
-   next();
- });
+
 
 module.exports = app;
